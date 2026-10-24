@@ -1,0 +1,87 @@
+=== Adam-300 (learns ~batch 160): 40 params, 300 batches
+  loss: first 2.96 -> final 0.033 | <1.0 at batch 151 | <0.5 at batch 165
+  blocks (start | mean sensitivity | mean loss):
+      1 | 7.07e-05 | 2.828
+     26 | 4.54e-05 | 2.774
+     51 | 7.18e-05 | 2.757
+     76 | 1.43e-04 | 2.700
+    101 | 1.91e-04 | 2.472
+    126 | 3.91e-04 | 1.612
+    151 | 3.53e-04 | 0.558
+    176 | 2.65e-04 | 0.149
+    201 | 2.73e-04 | 0.068
+    226 | 2.61e-04 | 0.046
+    251 | 2.43e-04 | 0.032
+    276 | 3.29e-04 | 0.026
+  corr(block sensitivity, block loss) = -0.75
+  params with late sensitivity >2x early: 34/40
+  top growth (param | early -> late | ratio):
+    layers.0.self_attn.in_proj_weight             9.21e-06 -> 4.01e-04 | 43.5x
+    token_emb.weight                              4.70e-06 -> 1.52e-04 | 32.3x
+    pos_emb.weight                                2.85e-06 -> 8.81e-05 | 30.9x
+    layers.0.linear1.weight                       6.16e-06 -> 1.43e-04 | 23.2x
+    layers.1.self_attn.in_proj_weight             1.15e-05 -> 1.72e-04 | 14.9x
+    layers.0.linear2.weight                       1.92e-05 -> 2.49e-04 | 13.0x
+    layers.1.linear1.weight                       6.12e-06 -> 7.69e-05 | 12.6x
+    layers.0.self_attn.out_proj.weight            2.05e-05 -> 2.53e-04 | 12.3x
+  bottom growth:
+    layers.2.linear2.bias                         1.56e-04 -> 1.84e-04 | 1.2x
+    head.weight                                   1.74e-04 -> 1.77e-04 | 1.0x
+    layers.2.norm2.weight                         1.11e-04 -> 9.01e-05 | 0.8x
+  recruited: 34/40 | median batch 129 | by 25-batch block: {51: 2, 76: 7, 101: 7, 126: 11, 151: 3, 176: 2, 201: 1, 276: 1}
+
+=== SGD-300 (learns ~batch 245): 40 params, 300 batches
+  loss: first 2.96 -> final 0.089 | <1.0 at batch 240 | <0.5 at batch 250
+  blocks (start | mean sensitivity | mean loss):
+      1 | 8.78e-05 | 2.845
+     26 | 5.56e-05 | 2.798
+     51 | 6.50e-05 | 2.785
+     76 | 6.37e-05 | 2.775
+    101 | 9.76e-05 | 2.758
+    126 | 1.23e-04 | 2.729
+    151 | 1.65e-04 | 2.694
+    176 | 2.13e-04 | 2.632
+    201 | 3.19e-04 | 2.349
+    226 | 4.97e-04 | 1.149
+    251 | 3.99e-04 | 0.223
+    276 | 4.76e-04 | 0.124
+  corr(block sensitivity, block loss) = -0.89
+  params with late sensitivity >2x early: 40/40
+  top growth (param | early -> late | ratio):
+    layers.0.self_attn.in_proj_weight             1.09e-05 -> 6.11e-04 | 55.8x
+    pos_emb.weight                                3.38e-06 -> 1.76e-04 | 52.1x
+    token_emb.weight                              5.73e-06 -> 2.59e-04 | 45.2x
+    layers.1.linear1.weight                       4.51e-06 -> 1.08e-04 | 23.9x
+    layers.0.linear1.weight                       7.85e-06 -> 1.52e-04 | 19.4x
+    layers.0.self_attn.out_proj.weight            1.84e-05 -> 2.09e-04 | 11.4x
+    layers.1.linear2.weight                       1.77e-05 -> 1.87e-04 | 10.6x
+    layers.0.norm1.bias                           1.20e-04 -> 1.11e-03 | 9.2x
+  bottom growth:
+    layers.2.norm2.weight                         1.11e-04 -> 2.96e-04 | 2.7x
+    head.bias                                     3.41e-04 -> 8.92e-04 | 2.6x
+    layers.2.self_attn.out_proj.weight            4.23e-05 -> 9.96e-05 | 2.4x
+  recruited: 35/40 | median batch 203 | by 25-batch block: {101: 1, 126: 3, 151: 5, 176: 4, 201: 6, 226: 11, 251: 3, 276: 2}
+
+=== BIG-70 (no learning yet): 76 params, 70 batches
+  loss: first 2.94 -> final 2.786 | <1.0 at batch None | <0.5 at batch None
+  blocks (start | mean sensitivity | mean loss):
+      1 | 9.51e-06 | 2.912
+     26 | 5.10e-06 | 2.795
+     51 | 4.51e-06 | 2.797
+  corr(block sensitivity, block loss) = 0.99
+  params with late sensitivity >2x early: 0/76
+  top growth (param | early -> late | ratio):
+    layers.5.norm2.weight                         3.05e-05 -> 3.50e-05 | 1.1x
+    head.weight                                   1.02e-04 -> 9.23e-05 | 0.9x
+    head.bias                                     1.61e-04 -> 1.42e-04 | 0.9x
+    layers.5.norm1.weight                         2.03e-05 -> 1.42e-05 | 0.7x
+    layers.5.norm2.bias                           2.60e-05 -> 1.67e-05 | 0.6x
+    layers.5.linear1.bias                         3.68e-06 -> 2.17e-06 | 0.6x
+    layers.5.linear1.weight                       2.81e-06 -> 1.64e-06 | 0.6x
+    layers.5.linear2.weight                       7.37e-06 -> 4.31e-06 | 0.6x
+  bottom growth:
+    pos_emb.weight                                1.88e-07 -> 4.65e-10 | 0.0x
+    layers.0.linear2.weight                       1.72e-06 -> 4.01e-09 | 0.0x
+    layers.1.self_attn.out_proj.bias              1.43e-05 -> 2.89e-08 | 0.0x
+  recruited: 0
+
